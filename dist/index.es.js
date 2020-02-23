@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import reactDom from 'react-dom';
-import T from 'prop-types';
+import PropTypes from 'prop-types';
 import server from 'react-dom/server';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -16256,27 +16256,27 @@ var QuillComponent = createReactClass({
 	mixins: [ mixin ],
 
 	propTypes: {
-		id: T.string,
-		className: T.string,
-		theme: T.string,
-		style: T.object,
-		readOnly: T.bool,
-		value: T.oneOfType([T.string, T.shape({ops: T.array})]),
-		defaultValue: T.oneOfType([T.string, T.shape({ops: T.array})]),
-		placeholder: T.string,
-		tabIndex: T.number,
-		bounds: T.oneOfType([T.string, T.element]),
-		onChange: T.func,
-		onChangeSelection: T.func,
-		onFocus: T.func,
-		onBlur: T.func,
-		onKeyPress: T.func,
-		onKeyDown: T.func,
-		onKeyUp: T.func,
-		preserveWhitespace: T.bool,
+		id: PropTypes.string,
+		className: PropTypes.string,
+		theme: PropTypes.string,
+		style: PropTypes.object,
+		readOnly: PropTypes.bool,
+		value: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({ops: PropTypes.array})]),
+		defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({ops: PropTypes.array})]),
+		placeholder: PropTypes.string,
+		tabIndex: PropTypes.number,
+		bounds: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+		onChange: PropTypes.func,
+		onChangeSelection: PropTypes.func,
+		onFocus: PropTypes.func,
+		onBlur: PropTypes.func,
+		onKeyPress: PropTypes.func,
+		onKeyDown: PropTypes.func,
+		onKeyUp: PropTypes.func,
+		preserveWhitespace: PropTypes.bool,
 
 		modules: function(props) {
-			var isNotObject = T.object.apply(this, arguments);
+			var isNotObject = PropTypes.object.apply(this, arguments);
 			if (isNotObject) return isNotObject;
 
 			if (
@@ -16299,7 +16299,7 @@ var QuillComponent = createReactClass({
 		},
 
 		formats: function(props) {
-			var isNotArrayOfString = T.arrayOf(T.string).apply(this, arguments);
+			var isNotArrayOfString = PropTypes.arrayOf(PropTypes.string).apply(this, arguments);
 
 			if (isNotArrayOfString) return new Error(
 				'You cannot specify custom `formats` anymore. Use Parchment instead.  ' +
@@ -16324,7 +16324,7 @@ var QuillComponent = createReactClass({
 
 		children: function(props) {
 			// Validate that the editor has only one child element and it is not a <textarea>
-			var isNotASingleElement = T.element.apply(this, arguments);
+			var isNotASingleElement = PropTypes.element.apply(this, arguments);
 			if (isNotASingleElement) return new Error(
 				'The Quill editing area can only be composed of a single React element.'
 			);
@@ -16722,10 +16722,10 @@ var QuillToolbar = createReactClass({
 	displayName: 'Quill Toolbar',
 
 	propTypes: {
-		id:        T.string,
-		className: T.string,
-		style:     T.object,
-		items:     T.array
+		id:        PropTypes.string,
+		className: PropTypes.string,
+		style:     PropTypes.object,
+		items:     PropTypes.array
 	},
 
 	getDefaultProps: function() {
@@ -16948,9 +16948,9 @@ var Editor = function Editor(props) {
 };
 
 Editor.propTypes = {
-  initialContent: T.array,
-  onChange: T.func,
-  placeholder: T.string
+  initialContent: PropTypes.array,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string
 };
 
 var inlineStyle = { display: "inline", padding: 0 };
@@ -16994,9 +16994,9 @@ EditorContent.defaultProps = {
 };
 
 EditorContent.propTypes = {
-  content: T.string.isRequired,
-  className: T.string,
-  isInline: T.bool
+  content: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  isInline: PropTypes.bool
 };
 
 export { Editor, EditorContent };
