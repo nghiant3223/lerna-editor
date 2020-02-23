@@ -16861,6 +16861,20 @@ lib.Quill = Quill_1;
 lib.Mixin = Mixin;
 lib.Toolbar = Toolbar;
 
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
 var slicedToArray = function () {
   function sliceIterator(arr, i) {
     var _arr = [];
@@ -16944,7 +16958,6 @@ var inlineStyle = { display: "inline", padding: 0 };
 var EditorContent = function EditorContent(props) {
   var content = props.content,
       className = props.className,
-      style = props.style,
       isInline = props.isInline;
 
 
@@ -16956,7 +16969,7 @@ var EditorContent = function EditorContent(props) {
         style: inlineStyle
       },
       React.createElement("div", {
-        style: inlineStyle,
+        style: _extends({}, inlineStyle),
         className: "ql-editor",
         dangerouslySetInnerHTML: { __html: content }
       })
@@ -16966,10 +16979,10 @@ var EditorContent = function EditorContent(props) {
   return React.createElement(
     "div",
     {
-      className: className ? className + " ql-snow" : "ql-snow",
-      style: style
+      className: className ? className + " ql-snow" : "ql-snow"
     },
     React.createElement("div", {
+      style: { padding: 0 },
       className: "ql-editor",
       dangerouslySetInnerHTML: { __html: content }
     })
