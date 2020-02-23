@@ -1,12 +1,18 @@
 {
   "name": "doodle-editor",
-  "version": "1.0.17",
+  "version": "1.0.16",
   "description": "",
   "author": "ntncsebku",
   "license": "MIT",
   "repository": "ntncsebku/doodle-editor",
   "main": "dist/index.js",
-  "keywords": ["editor", "draftjs", "quilljs", "javascript", "react"],
+  "keywords": [
+    "editor",
+    "draftjs",
+    "quilljs",
+    "javascript",
+    "react"
+  ],
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "engines": {
