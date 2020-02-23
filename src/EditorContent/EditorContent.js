@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const inlineStyle = { display: "inline", padding: 0 };
 
 const EditorContent = props => {
-  const { content, className, style, isInline } = props;
+  const { content, className, isInline } = props;
 
   if (isInline) {
     return (
@@ -13,7 +13,7 @@ const EditorContent = props => {
         style={inlineStyle}
       >
         <div
-          style={inlineStyle}
+          style={{...inlineStyle}}
           className={"ql-editor"}
           dangerouslySetInnerHTML={{ __html: content }}
         />
@@ -24,9 +24,9 @@ const EditorContent = props => {
   return (
     <div
       className={className ? `${className} ql-snow` : "ql-snow"}
-      style={style}
     >
       <div
+          style={{padding: 0}}
         className={"ql-editor"}
         dangerouslySetInnerHTML={{ __html: content }}
       />
