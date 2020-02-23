@@ -10,7 +10,6 @@
 
 ## Demo
 
-Inline-style: 
 ![alt text](editor.png "EDITOR DEMO")
 
 ## Install
