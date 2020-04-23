@@ -1,12 +1,12 @@
-# doodle-editor
+# lerna-editor
 
 >
 
-[![NPM](https://img.shields.io/npm/v/doodle-editor.svg)](https://www.npmjs.com/package/doodle-editor) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/lerna-editor.svg)](https://www.npmjs.com/package/lerna-editor) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Introduction
 
-`doodle-editor` is a rich text editor component used for React project
+`lerna-editor` is a rich text editor component used for React project
 
 ## Demo
 
@@ -15,7 +15,7 @@
 ## Install
 
 ```bash
-npm install --save doodle-editor
+npm install --save lerna-editor
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ The following code shows how to use the rich text editor:
 
 ```jsx
 import React, { Component } from "react";
-import { Editor } from "doodle-editor";
+import { Editor } from "lerna-editor";
 
 class Example extends Component {
   render() {
@@ -65,7 +65,7 @@ When you want to render the HTML generated from editor, you use the following co
 
 ```jsx
 import React, { Component } from "react";
-import { EditorContent } from "doodle-editor";
+import { EditorContent } from "lerna-editor";
 
 class Example extends Component {
   render() {

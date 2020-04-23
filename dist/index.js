@@ -16988,8 +16988,7 @@ var EditorContent = function EditorContent(props) {
     {
       className: className ? className + " ql-snow" : "ql-snow"
     },
-    React__default.createElement("div", {
-      style: { padding: 0 },
+    React__default.createElement("div", { style: { padding: 0 },
       className: "ql-editor",
       dangerouslySetInnerHTML: { __html: content }
     })

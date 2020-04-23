@@ -1,10 +1,13 @@
 {
-  "name": "doodle-editor",
-  "version": "1.0.17",
-  "description": "",
+  "name": "lerna-editor",
+  "version": "0.0.1",
+  "description": ">",
   "author": "ntncsebku",
   "license": "MIT",
-  "repository": "ntncsebku/doodle-editor",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nghiant3223/lerna-editor.git"
+  },
   "main": "dist/index.js",
   "keywords": [
     "editor",
@@ -68,5 +71,12 @@
   "dependencies": {
     "prop-types": "^15.7.2",
     "react-quill": "^1.3.3"
+  },
+  "bugs": {
+    "url": "https://github.com/nghiant3223/lerna-editor/issues"
+  },
+  "homepage": "https://github.com/nghiant3223/lerna-editor#readme",
+  "directories": {
+    "example": "example"
   }
 }

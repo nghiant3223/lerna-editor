@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Editor } from "doodle-editor";
+import { Editor } from "lerna-editor";
 
 export default class App extends Component {
   render() {

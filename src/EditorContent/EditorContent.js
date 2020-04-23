@@ -25,8 +25,7 @@ const EditorContent = props => {
     <div
       className={className ? `${className} ql-snow` : "ql-snow"}
     >
-      <div
-          style={{padding: 0}}
+      <div style={{padding: 0}}
         className={"ql-editor"}
         dangerouslySetInnerHTML={{ __html: content }}
       />

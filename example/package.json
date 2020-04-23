@@ -1,6 +1,6 @@
 {
-  "name": "doodle-editor-example",
-  "homepage": "https://ntncsebku.github.io/doodle-editor",
+  "name": "lerna-editor-example",
+  "homepage": "https://ntncsebku.github.io/lerna-editor",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -9,7 +9,7 @@
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
     "react-scripts": "^1.1.4",
-    "doodle-editor": "file:.."
+    "lerna-editor": "file:.."
   },
   "scripts": {
     "start": "react-scripts start",
