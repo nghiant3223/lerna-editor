@@ -1,18 +1,19 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 
 import { Editor } from "lerna-editor";
 
-export default class App extends Component {
-  render() {
+export default function App()  {
+const [value, setValue] = useState('1');
+
     return (
       <div>
+          <button onClick={() => setValue("")}>clear</button>
         <Editor
-          text="Modern React component module"
+          value={value}
           onChange={(a, b, c) => {
             console.log(a, b, c);
           }}
         />
       </div>
     );
-  }
 }

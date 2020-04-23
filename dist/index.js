@@ -16921,14 +16921,18 @@ var slicedToArray = function () {
 }();
 
 var Editor = function Editor(props) {
-  var initialContent = props.initialContent,
+  var value = props.value,
       onChange = props.onChange,
       placeholder = props.placeholder;
 
-  var _useState = React.useState(initialContent || ""),
+  var _useState = React.useState(value || ""),
       _useState2 = slicedToArray(_useState, 2),
-      value = _useState2[0],
-      setValue = _useState2[1];
+      internalValue = _useState2[0],
+      setInternalValue = _useState2[1];
+
+  React.useEffect(function () {
+    setInternalValue(value);
+  }, [value]);
 
   var modules = {
     toolbar: [[{ header: [1, 2, 3, 4, 5, 6, false] }], ["bold", "italic", "underline", "strike", "blockquote"], [{ color: [] }, { background: [] }], [{ script: "sub" }, { script: "super" }, "formula"], ["code", "code-block"], [{ align: "" }, { align: "center" }, { align: "right" }, { align: "justify" }], [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }], ["link", "image", "video"], ["clean"]]
@@ -16937,7 +16941,7 @@ var Editor = function Editor(props) {
   var formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "color", "background", "script", "formula", "code", "code-block", "align", "list", "indent", "bullet", "link", "image", "video"];
 
   function handleChange(content, delta, source, editor) {
-    setValue(content);
+    setInternalValue(content);
 
     if (onChange) {
       onChange(content, editor.getContents().ops, editor.getText());
@@ -16946,7 +16950,7 @@ var Editor = function Editor(props) {
 
   return React__default.createElement(lib, {
     style: { textAlign: "center" },
-    value: value,
+    value: internalValue,
     onChange: handleChange,
     modules: modules,
     formats: formats,
@@ -16955,7 +16959,7 @@ var Editor = function Editor(props) {
 };
 
 Editor.propTypes = {
-  initialContent: PropTypes.array,
+  value: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string
 };
