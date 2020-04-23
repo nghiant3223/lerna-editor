@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import reactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import server from 'react-dom/server';
@@ -16861,6 +16861,49 @@ lib.Quill = Quill_1;
 lib.Mixin = Mixin;
 lib.Toolbar = Toolbar;
 
+var Editor = function Editor(props) {
+  var value = props.value,
+      onChange = props.onChange,
+      placeholder = props.placeholder;
+
+
+  function handleChange(html) {
+    if (!onChange) {
+      return;
+    }
+
+    onChange(html);
+  }
+
+  function getRenderValue(value) {
+    if (value === undefined || value === null) {
+      return null;
+    }
+    return value.html || value;
+  }
+
+  return React.createElement(lib, {
+    style: { textAlign: "center" },
+    value: getRenderValue(value),
+    onChange: handleChange,
+    modules: modules,
+    formats: formats,
+    placeholder: placeholder
+  });
+};
+
+Editor.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string
+};
+
+var modules = {
+  toolbar: [[{ header: [1, 2, 3, 4, 5, 6, false] }], ["bold", "italic", "underline", "strike", "blockquote"], [{ color: [] }, { background: [] }], [{ script: "sub" }, { script: "super" }, "formula"], ["code", "code-block"], [{ align: "" }, { align: "center" }, { align: "right" }, { align: "justify" }], [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }], ["link", "image", "video"], ["clean"]]
+};
+
+var formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "color", "background", "script", "formula", "code", "code-block", "align", "list", "indent", "bullet", "link", "image", "video"];
+
 var _extends = Object.assign || function (target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i];
@@ -16873,88 +16916,6 @@ var _extends = Object.assign || function (target) {
   }
 
   return target;
-};
-
-var slicedToArray = function () {
-  function sliceIterator(arr, i) {
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-    var _e = undefined;
-
-    try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"]) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-
-    return _arr;
-  }
-
-  return function (arr, i) {
-    if (Array.isArray(arr)) {
-      return arr;
-    } else if (Symbol.iterator in Object(arr)) {
-      return sliceIterator(arr, i);
-    } else {
-      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-    }
-  };
-}();
-
-var Editor = function Editor(props) {
-  var value = props.value,
-      onChange = props.onChange,
-      placeholder = props.placeholder;
-
-  var _useState = useState(value || ""),
-      _useState2 = slicedToArray(_useState, 2),
-      internalValue = _useState2[0],
-      setInternalValue = _useState2[1];
-
-  useEffect(function () {
-    setInternalValue(value);
-  }, [value]);
-
-  var modules = {
-    toolbar: [[{ header: [1, 2, 3, 4, 5, 6, false] }], ["bold", "italic", "underline", "strike", "blockquote"], [{ color: [] }, { background: [] }], [{ script: "sub" }, { script: "super" }, "formula"], ["code", "code-block"], [{ align: "" }, { align: "center" }, { align: "right" }, { align: "justify" }], [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }], ["link", "image", "video"], ["clean"]]
-  };
-
-  var formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "color", "background", "script", "formula", "code", "code-block", "align", "list", "indent", "bullet", "link", "image", "video"];
-
-  function handleChange(content, delta, source, editor) {
-    setInternalValue(content);
-
-    if (onChange) {
-      onChange(content, editor.getContents().ops, editor.getText());
-    }
-  }
-
-  return React.createElement(lib, {
-    style: { textAlign: "center" },
-    value: internalValue,
-    onChange: handleChange,
-    modules: modules,
-    formats: formats,
-    placeholder: placeholder
-  });
-};
-
-Editor.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  placeholder: PropTypes.string
 };
 
 var inlineStyle = { display: "inline", padding: 0 };

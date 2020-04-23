@@ -5,21 +5,19 @@ import ReactQuill from "react-quill";
 const Editor = props => {
   const { value, onChange, placeholder } = props;
 
-  function handleChange(html, delta, source, editor) {
+  function handleChange(html) {
     if (!onChange) {
       return;
     }
-    onChange(html, editor.getContents().ops, editor.getText());
+
+    onChange(html);
   }
 
   function getRenderValue(value) {
-    if (typeof value === "string") {
-      return value;
-    }
     if (value === undefined || value === null) {
       return null;
     }
-    return value.html;
+    return value.html || value;
   }
 
   return (

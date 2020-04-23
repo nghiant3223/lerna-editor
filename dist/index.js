@@ -4,8 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var React = require('react');
-var React__default = _interopDefault(React);
+var React = _interopDefault(require('react'));
 var reactDom = _interopDefault(require('react-dom'));
 var PropTypes = _interopDefault(require('prop-types'));
 var server = _interopDefault(require('react-dom/server'));
@@ -12585,7 +12584,7 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
 
 var factory_1 = factory;
 
-if (typeof React__default === 'undefined') {
+if (typeof React === 'undefined') {
   throw Error(
     'create-react-class could not find the React object. If you are using script tags, ' +
       'make sure that React is being loaded before create-react-class.'
@@ -12593,11 +12592,11 @@ if (typeof React__default === 'undefined') {
 }
 
 // Hack to grab NoopUpdateQueue from isomorphic React
-var ReactNoopUpdateQueue = new React__default.Component().updater;
+var ReactNoopUpdateQueue = new React.Component().updater;
 
 var createReactClass = factory_1(
-  React__default.Component,
-  React__default.isValidElement,
+  React.Component,
+  React.isValidElement,
   ReactNoopUpdateQueue
 );
 
@@ -16091,7 +16090,7 @@ var reactDomFactories = createCommonjsModule(function (module, exports) {
 
 (function(f) {
   {
-    module.exports = f(React__default);
+    module.exports = f(React);
     /* global define */
   }
 })(function(React$$1) {
@@ -16336,8 +16335,8 @@ var QuillComponent = createReactClass({
 				'The Quill editing area can only be composed of a single React element.'
 			);
 
-			if (React__default.Children.count(props.children)) {
-				var child = React__default.Children.only(props.children);
+			if (React.Children.count(props.children)) {
+				var child = React.Children.only(props.children);
 				if (child.type === 'textarea') return new Error(
 					'Quill does not support editing on a <textarea>. Use a <div> instead.'
 				);
@@ -16586,12 +16585,12 @@ var QuillComponent = createReactClass({
 			ref: function(element) { self.editingArea = element; },
 		};
 
-		var customElement = React__default.Children.count(children)
-			? React__default.Children.only(children)
+		var customElement = React.Children.count(children)
+			? React.Children.only(children)
 			: null;
 		var defaultElement = preserveWhitespace ? reactDomFactories.pre : reactDomFactories.div;
 		var editingArea = customElement
-			? React__default.cloneElement(customElement, properties)
+			? React.cloneElement(customElement, properties)
 			: defaultElement(properties);
 
 		return editingArea;
@@ -16868,6 +16867,49 @@ lib.Quill = Quill_1;
 lib.Mixin = Mixin;
 lib.Toolbar = Toolbar;
 
+var Editor = function Editor(props) {
+  var value = props.value,
+      onChange = props.onChange,
+      placeholder = props.placeholder;
+
+
+  function handleChange(html) {
+    if (!onChange) {
+      return;
+    }
+
+    onChange(html);
+  }
+
+  function getRenderValue(value) {
+    if (value === undefined || value === null) {
+      return null;
+    }
+    return value.html || value;
+  }
+
+  return React.createElement(lib, {
+    style: { textAlign: "center" },
+    value: getRenderValue(value),
+    onChange: handleChange,
+    modules: modules,
+    formats: formats,
+    placeholder: placeholder
+  });
+};
+
+Editor.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string
+};
+
+var modules = {
+  toolbar: [[{ header: [1, 2, 3, 4, 5, 6, false] }], ["bold", "italic", "underline", "strike", "blockquote"], [{ color: [] }, { background: [] }], [{ script: "sub" }, { script: "super" }, "formula"], ["code", "code-block"], [{ align: "" }, { align: "center" }, { align: "right" }, { align: "justify" }], [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }], ["link", "image", "video"], ["clean"]]
+};
+
+var formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "color", "background", "script", "formula", "code", "code-block", "align", "list", "indent", "bullet", "link", "image", "video"];
+
 var _extends = Object.assign || function (target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i];
@@ -16882,88 +16924,6 @@ var _extends = Object.assign || function (target) {
   return target;
 };
 
-var slicedToArray = function () {
-  function sliceIterator(arr, i) {
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-    var _e = undefined;
-
-    try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"]) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-
-    return _arr;
-  }
-
-  return function (arr, i) {
-    if (Array.isArray(arr)) {
-      return arr;
-    } else if (Symbol.iterator in Object(arr)) {
-      return sliceIterator(arr, i);
-    } else {
-      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-    }
-  };
-}();
-
-var Editor = function Editor(props) {
-  var value = props.value,
-      onChange = props.onChange,
-      placeholder = props.placeholder;
-
-  var _useState = React.useState(value || ""),
-      _useState2 = slicedToArray(_useState, 2),
-      internalValue = _useState2[0],
-      setInternalValue = _useState2[1];
-
-  React.useEffect(function () {
-    setInternalValue(value);
-  }, [value]);
-
-  var modules = {
-    toolbar: [[{ header: [1, 2, 3, 4, 5, 6, false] }], ["bold", "italic", "underline", "strike", "blockquote"], [{ color: [] }, { background: [] }], [{ script: "sub" }, { script: "super" }, "formula"], ["code", "code-block"], [{ align: "" }, { align: "center" }, { align: "right" }, { align: "justify" }], [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }], ["link", "image", "video"], ["clean"]]
-  };
-
-  var formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "color", "background", "script", "formula", "code", "code-block", "align", "list", "indent", "bullet", "link", "image", "video"];
-
-  function handleChange(content, delta, source, editor) {
-    setInternalValue(content);
-
-    if (onChange) {
-      onChange(content, editor.getContents().ops, editor.getText());
-    }
-  }
-
-  return React__default.createElement(lib, {
-    style: { textAlign: "center" },
-    value: internalValue,
-    onChange: handleChange,
-    modules: modules,
-    formats: formats,
-    placeholder: placeholder
-  });
-};
-
-Editor.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  placeholder: PropTypes.string
-};
-
 var inlineStyle = { display: "inline", padding: 0 };
 
 var EditorContent = function EditorContent(props) {
@@ -16973,13 +16933,13 @@ var EditorContent = function EditorContent(props) {
 
 
   if (isInline) {
-    return React__default.createElement(
+    return React.createElement(
       "div",
       {
         className: className ? className + " ql-snow" : "ql-snow",
         style: inlineStyle
       },
-      React__default.createElement("div", {
+      React.createElement("div", {
         style: _extends({}, inlineStyle),
         className: "ql-editor",
         dangerouslySetInnerHTML: { __html: content }
@@ -16987,12 +16947,12 @@ var EditorContent = function EditorContent(props) {
     );
   }
 
-  return React__default.createElement(
+  return React.createElement(
     "div",
     {
       className: className ? className + " ql-snow" : "ql-snow"
     },
-    React__default.createElement("div", { style: { padding: 0 },
+    React.createElement("div", { style: { padding: 0 },
       className: "ql-editor",
       dangerouslySetInnerHTML: { __html: content }
     })
