@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import ReactQuill, { Quill } from "react-quill";
 
 const Editor = props => {
-  const { initialContent, onChange, placeholder } = props;
+  const { value, onChange, placeholder } = props;
 
-  const [value, setValue] = useState(initialContent || "");
+  const [internalValue, setInternalValue] = useState(value || "");
 
   const modules = {
     toolbar: [
@@ -61,7 +61,7 @@ const Editor = props => {
   ];
 
   function handleChange(content, delta, source, editor) {
-    setValue(content);
+    setInternalValue(content);
 
     if (onChange) {
       onChange(content, editor.getContents().ops, editor.getText());
@@ -71,7 +71,7 @@ const Editor = props => {
   return (
     <ReactQuill
       style={{ textAlign: "center" }}
-      value={value}
+      value={internalValue}
       onChange={handleChange}
       modules={modules}
       formats={formats}
@@ -81,7 +81,7 @@ const Editor = props => {
 };
 
 Editor.propTypes = {
-  initialContent: PropTypes.array,
+  value: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string
 };
