@@ -79,7 +79,7 @@ class Example extends Component {
 | Name    |      Description      |     Type | Default value |
 | ------- | :-------------------: | -------: | ------------: |
 | content | Content of the editor | `string` &#124; `HTML` |        `null` |
-| isInline | Whether editor is inline or block | `bool` | `false` |
+| inline | Whether editor is inline or block | `bool` | `false` |
 | className | `className` of the editor content | `string` | `null` |
 
 ## License

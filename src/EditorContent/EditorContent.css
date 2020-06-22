@@ -1,0 +1,8 @@
+.inline-editor-content {
+    display: inline;
+    padding: 0;
+}
+
+.inline-editor-content p {
+    display: inline;
+}

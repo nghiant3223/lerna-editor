@@ -16910,38 +16910,55 @@ var modules = {
 
 var formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "color", "background", "script", "formula", "code", "code-block", "align", "list", "indent", "bullet", "link", "image", "video"];
 
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
+function styleInject(css, ref) {
+  if ( ref === void 0 ) ref = {};
+  var insertAt = ref.insertAt;
 
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
+  if (!css || typeof document === 'undefined') { return; }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
     }
+  } else {
+    head.appendChild(style);
   }
 
-  return target;
-};
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css = ".EditorContent_inline-editor-content__JyH6B {\n    display: inline;\n    padding: 0;\n}\n\n.EditorContent_inline-editor-content__JyH6B p {\n    display: inline;\n}";
+styleInject(css);
 
 var inlineStyle = { display: "inline", padding: 0 };
 
-var EditorContent = function EditorContent(props) {
+var EditorContent$1 = function EditorContent(props) {
   var content = props.content,
       className = props.className,
-      isInline = props.isInline;
+      inline = props.inline;
 
 
-  if (isInline) {
+  var finalClassName = "ql-snow";
+  if (className) {
+    finalClassName += " " + className;
+  }
+
+  if (inline) {
     return React.createElement(
       "div",
-      {
-        className: className ? className + " ql-snow" : "ql-snow",
-        style: inlineStyle
-      },
+      { className: finalClassName, style: inlineStyle },
       React.createElement("div", {
-        style: _extends({}, inlineStyle),
-        className: "ql-editor",
+        className: "ql-editor inline-editor-content",
         dangerouslySetInnerHTML: { __html: content }
       })
     );
@@ -16949,9 +16966,7 @@ var EditorContent = function EditorContent(props) {
 
   return React.createElement(
     "div",
-    {
-      className: className ? className + " ql-snow" : "ql-snow"
-    },
+    { className: finalClassName },
     React.createElement("div", { style: { padding: 0 },
       className: "ql-editor",
       dangerouslySetInnerHTML: { __html: content }
@@ -16959,16 +16974,16 @@ var EditorContent = function EditorContent(props) {
   );
 };
 
-EditorContent.defaultProps = {
-  isInline: false
+EditorContent$1.defaultProps = {
+  inline: false
 };
 
-EditorContent.propTypes = {
+EditorContent$1.propTypes = {
   content: PropTypes.string.isRequired,
   className: PropTypes.string,
-  isInline: PropTypes.bool
+  inline: PropTypes.bool
 };
 
 exports.Editor = Editor;
-exports.EditorContent = EditorContent;
+exports.EditorContent = EditorContent$1;
 //# sourceMappingURL=index.js.map

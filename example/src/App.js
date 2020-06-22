@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 
-import { Editor } from "lerna-editor";
+import { Editor, EditorContent } from "lerna-editor";
 
 export default function App()  {
 const [value, setValue] = useState('1');
@@ -14,6 +14,8 @@ const [value, setValue] = useState('1');
             console.log(a, b, c);
           }}
         />
+
+        <div>the answer is <EditorContent content={"<p>wtf</p>"} inline/></div>
       </div>
     );
 }

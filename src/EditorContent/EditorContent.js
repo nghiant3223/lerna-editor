@@ -1,20 +1,22 @@
 import React from "react";
+import "./EditorContent.css";
 import PropTypes from "prop-types";
 
 const inlineStyle = { display: "inline", padding: 0 };
 
 const EditorContent = props => {
-  const { content, className, isInline } = props;
+  const { content, className, inline } = props;
 
-  if (isInline) {
+  let finalClassName = "ql-snow";
+  if (className) {
+    finalClassName += " " + className;
+  }
+
+  if (inline) {
     return (
-      <div
-        className={className ? `${className} ql-snow` : "ql-snow"}
-        style={inlineStyle}
-      >
+      <div className={finalClassName} style={inlineStyle}>
         <div
-          style={{...inlineStyle}}
-          className={"ql-editor"}
+          className={"ql-editor inline-editor-content"}
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </div>
@@ -22,9 +24,7 @@ const EditorContent = props => {
   }
 
   return (
-    <div
-      className={className ? `${className} ql-snow` : "ql-snow"}
-    >
+    <div className={finalClassName}>
       <div style={{padding: 0}}
         className={"ql-editor"}
         dangerouslySetInnerHTML={{ __html: content }}
@@ -34,13 +34,13 @@ const EditorContent = props => {
 };
 
 EditorContent.defaultProps = {
-  isInline: false
+  inline: false
 };
 
 EditorContent.propTypes = {
   content: PropTypes.string.isRequired,
   className: PropTypes.string,
-  isInline: PropTypes.bool
+  inline: PropTypes.bool
 };
 
 export default EditorContent;
